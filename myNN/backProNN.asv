@@ -1,6 +1,6 @@
 %==========================================================================
 %Description:
-%       backpropagation, calculate the delta and dE/dW
+%       backpropagation
 %Input:
 %       nn     : neural networks including its parameters and structure
 %Output:
@@ -22,11 +22,17 @@ function nn = backProNN(nn)
         end
         
         if i+1==n % no bias term to be removed             
-            nn.delta{i} = (nn.delta{i + 1} * nn.W{i}) .* deri_actFuc;
-            nn.dEdW{i} = (nn.delta{i + 1}' * nn.activation{i}) / size(nn.delta{i + 1}, 1);
+            delta{i} = (delta{i + 1} * nn.W{i}) .* deri_actFuc; % Bishop (5.56)
         else % the bias term needs to be removed
-            nn.delta{i} = (nn.delta{i + 1}(:, 2:end) * nn.W{i}) .* deri_actFuc;
-            nn.dEdW{i} = (nn.delta{i + 1}(:, 2:end)' * nn.activation{i}) / size(nn.delta{i + 1}, 1);
+            delta{i} = (delta{i + 1}(:,2:end) * nn.W{i}) .* deri_actFuc;
+        end
+    end
+
+    for i = 1 : (n - 1)
+        if i+1==n
+            nn.dW{i} = (delta{i + 1}' * nn.a{i}) / size(delta{i + 1}, 1);
+        else
+            nn.dW{i} = (delta{i + 1}(:,2:end)' * nn.a{i}) / size(delta{i + 1}, 1);      
         end
     end    
 end

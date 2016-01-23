@@ -30,4 +30,5 @@ function nn = forwardNN(nn, x, y)
 
     nn.activation{nn.layerNum} = Softmax(tmp);
     nn.error = -sum(sum(y .* log(nn.activation{nn.layerNum}))) / size(x, 1);
+    nn.delta{nn.layerNum} = y - nn.activation{nn.layerNum};
 end

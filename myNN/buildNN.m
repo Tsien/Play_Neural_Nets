@@ -12,6 +12,7 @@
 %       neurons, 300 hidden neurons and 10 output neurons
 %==========================================================================
 function nn = buildNN(archit)
+    nn.architecture = archit;
     nn.layerNum = numel(archit); % Ex(h): the number of layers
     nn.learnRate = 0.1; % learning rate
     nn.scalLearnRate = 1; % scaling learning rate between every epoch

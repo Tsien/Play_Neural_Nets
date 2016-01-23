@@ -21,13 +21,11 @@ function nn = trainNN(nn, train_x, train_y, exp, valid_x, valid_y)
             batch_x = train_x(:, index((j - 1) * exp.batchSize + 1:j * exp.batchSize, :));
             batch_y = train_y(index((j - 1) * exp.batchSize + 1:j * exp.batchSize, :));
             %forward
-                nn = forwardNN(nn, batch_x);
-                nn = backProNN(nn, batch_y);
-                nn = updateWNN(nn);
+            nn = forwardNN(nn, batch_x);
             %BP
-            
+            nn = backProNN(nn, batch_y);
             %Update weights
-            
+            nn = updateWNN(nn);
         end
         t = toc;
     end
