@@ -8,12 +8,13 @@ test_y  = double(test_y);
 
 % normalize
 [train_x, mu, sigma] = zscore(train_x);
+sigma = max(sigma, eps);%avoid zero sigma, -->NAN
 test_x = normalize(test_x, mu, sigma);
 
 %% ex1 vanilla neural net
 rand('state',0)
 nn = nnsetup([784 100 10]);
-opts.numepochs = 10;   %  Number of full sweeps through data
+opts.numepochs = 1;   %  Number of full sweeps through data
 opts.batchsize = 100;  %  Take a mean gradient step over this many samples
 [nn, L] = nntrain(nn, train_x, train_y, opts);
 
