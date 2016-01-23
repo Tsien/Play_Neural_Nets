@@ -3,7 +3,7 @@
 %       Train a neural networks.
 %Input:
 %       nn     : neural networks including its parameters and structure
-%       train_x: images, already rescale to [0,1] double, 784X60000
+%       train_x: images, already rescale to [0,1] double, 60000X784
 %       train_y: labels
 %       valid_x: images used as validate set
 %       valid_y: labels
@@ -21,7 +21,9 @@ function nn = trainNN(nn, train_x, train_y, exp, valid_x, valid_y)
             batch_x = train_x(:, index((j - 1) * exp.batchSize + 1:j * exp.batchSize, :));
             batch_y = train_y(index((j - 1) * exp.batchSize + 1:j * exp.batchSize, :));
             %forward
-            
+                nn = forwardNN(nn, batch_x);
+                nn = backProNN(nn, batch_y);
+                nn = updateWNN(nn);
             %BP
             
             %Update weights

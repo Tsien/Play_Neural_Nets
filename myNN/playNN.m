@@ -2,7 +2,7 @@
 %Description:
 %       main function for playing neural networks
 %Input:
-%       dataFile: contains MNIST data, images are already rescaled to [0,1] double, 784X60000
+%       dataFile: contains MNIST data, images are already rescaled to [0,1] double, 60000X784
 %Usage:
 %       nn = trainNN(train_x, train_y, valid_x, valid_y, options)
 %==========================================================================
@@ -11,6 +11,7 @@ function playNN(dataFile)
     load(dataFile);
     % normalize by zscoring
     [train_x, mu, sigma] = zscore(train_x);
+    sigma = max(sigma, eps);%avoid zero sigma, -->NAN
     test_x = normalize(test_x, mu, sigma);
     
     %Ex(d) Classification on MNIST database using vanilla neural networks
