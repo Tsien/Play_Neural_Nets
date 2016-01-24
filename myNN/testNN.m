@@ -12,8 +12,8 @@ function acc = testNN(nn, test_x, test_y)
     num = size(test_x,1);
     nn = forwardNN(nn, test_x, zeros(num, nn.architecture(end)));
     [tmp, labels] = max(nn.activation{end},[],2);
-    [tmp, expected] = max(test_y,[],2);
-    error = find(labels ~= expected);    
+    [tmp, target] = max(test_y,[],2);
+    error = find(labels ~= target);    
     acc = 1 - numel(error) / num;
 end
 

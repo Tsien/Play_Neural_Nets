@@ -4,8 +4,7 @@
 %Input:
 %       nn     : neural networks including its parameters and structure
 %Output:
-%       nn     : the neural networks after backpropagation, containing
-%       dE/dW for updating weights
+%       nn     : the neural networks after backpropagation after updating weights
 %==========================================================================
 function nn = backProNN(nn)
     n = nn.layerNum;

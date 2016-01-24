@@ -10,8 +10,8 @@
 %==========================================================================
 function nn = forwardNN(nn, x, y)
     num = size(x, 1);
-    x = [ones(num, 1), x];
-    nn.activation{1} = x;% the output of the input layer
+    % the output of the input layer
+    nn.activation{1} = [ones(num, 1), x];
     for i = 2 : nn.layerNum - 1
         tmp = nn.activation{i - 1} * nn.weights{i - 1};
         switch nn.activeFunc
@@ -22,12 +22,15 @@ function nn = forwardNN(nn, x, y)
             case 'ReLU'
                 nn.activation{i} = ReLU(tmp);%num X 784 * 784 X num
         end       
-        nn.activation{i} = [ones(num, 1), nn.activation{i}];%add bias
+        %add bias
+        nn.activation{i} = [ones(num, 1), nn.activation{i}];
     end
-    %for the output layer
+    %for the softmax output layer
     tmp = nn.activation{nn.layerNum - 1} * nn.weights{nn.layerNum - 1};
     nn.activation{nn.layerNum} = Softmax(tmp);
     
-    nn.error = -sum(sum(y .* log(nn.activation{nn.layerNum}))) / num; % cross-entropy error(Xent)
-    nn.delta{nn.layerNum} = -(y - nn.activation{nn.layerNum}); % delta of the output layer.
+    % cross-entropy error(Xent)
+    nn.error = -sum(sum(y .* log(nn.activation{nn.layerNum}))) / num; 
+    % delta of the output layer.
+    nn.delta{nn.layerNum} = -(y - nn.activation{nn.layerNum}); 
 end
