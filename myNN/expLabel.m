@@ -12,4 +12,5 @@ function labels = expLabel(y)
     for i = 1 : num
         labels(i, y(i) + 1) = 1;
     end
+    labels = double(labels);
 end

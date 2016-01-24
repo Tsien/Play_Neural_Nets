@@ -18,7 +18,7 @@ rand('state',0)
 nn = nnsetup([784 100 10]);
 opts.numepochs = 1;   %  Number of full sweeps through data
 opts.batchsize = 100;  %  Take a mean gradient step over this many samples
-opts.plot = 1;
+
 [nn, L] = nntrain(nn, train_x, train_y, opts);
 
 [er, bad] = nntest(nn, test_x, test_y);
