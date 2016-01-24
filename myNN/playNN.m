@@ -10,12 +10,8 @@ function playNN(dataFile)
     tic;
     load(dataFile);
     toc
-    train_x = double(train_x') / 255;
-    test_x  = double(test_x')  / 255;
-    train_y = double(train_y);
-    test_y  = double(test_y);
-    %train_y = expLabel(train_y);%60000 X 10
-    %test_y = expLabel(test_y);%10000 X 10
+    train_y = expLabel(train_y);%60000 X 10
+    test_y = expLabel(test_y);%10000 X 10
     % normalize by zscoring
     [train_x, mu, sigma] = zscore(train_x');%60000 X 784
     sigma = max(sigma, eps);%avoid zero sigma, -->NAN

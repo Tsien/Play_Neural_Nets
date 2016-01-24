@@ -22,10 +22,10 @@ function nn = trainNN(nn, train_x, train_y, exp, valid_x, valid_y)
             batch_y = train_y(index((j - 1) * exp.batchSize + 1:j * exp.batchSize), :);
             %forward
             nn = forwardNN(nn, batch_x, batch_y);
-            %BP
+            %Backpropagation
             nn = backProNN(nn);
             %Update weights
-            nn = updateWNN(nn);
+            %nn = updateWNN(nn);
         end
         toc
     end

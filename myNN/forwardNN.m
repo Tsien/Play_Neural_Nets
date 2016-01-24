@@ -27,6 +27,7 @@ function nn = forwardNN(nn, x, y)
     %for the output layer
     tmp = nn.activation{nn.layerNum - 1} * nn.weights{nn.layerNum - 1};
     nn.activation{nn.layerNum} = Softmax(tmp);
-    nn.error = -sum(sum(y .* log(nn.activation{nn.layerNum}))) / num;
-    nn.delta{nn.layerNum} = -(y - nn.activation{nn.layerNum});
+    
+    nn.error = -sum(sum(y .* log(nn.activation{nn.layerNum}))) / num; % cross-entropy error(Xent)
+    nn.delta{nn.layerNum} = -(y - nn.activation{nn.layerNum}); % delta of the output layer.
 end
