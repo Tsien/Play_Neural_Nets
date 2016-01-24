@@ -44,7 +44,7 @@ function nn = nnff(nn, x, y)
             nn.a{n} = nn.a{n - 1} * nn.W{n - 1}';
         case 'softmax'
             nn.a{n} = nn.a{n - 1} * nn.W{n - 1}';
-            nn.a{n} = exp(bsxfun(@minus, nn.a{n}, max(nn.a{n},[],2)));
+            nn.a{n} = exp(bsxfun(@minus, nn.a{n}, max(nn.a{n},[],2)));%???
             nn.a{n} = bsxfun(@rdivide, nn.a{n}, sum(nn.a{n}, 2)); 
     end
 

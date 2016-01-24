@@ -18,14 +18,14 @@ function playNN(dataFile)
     test_x = normalize(test_x', mu, sigma);%10000 X 784
     
     %Ex(d) Classification on MNIST database using vanilla neural networks
-    rand('state', 0); %Setting the generator to the same fixed state allows computations to be repeated. 
+    %rand('state', 0); %Setting the generator to the same fixed state allows computations to be repeated. 
     %set up the parameters of experiments
     exp.numEpochs = 1; 
     exp.batchSize = 100;
-    nn = buildNN([784, 100, 10]);
+    nn = buildNN([784, 300, 10]);
     nn = trainNN(nn, train_x, train_y, exp);
     acc = testNN(nn, test_x, test_y);
-    assert(1 - acc < 0.08, ['Too big error' num2str(1 - acc)]);
+    assert(1 - acc < 0.08, ['Too big error' ]);
 
     %Ex(e) Experiment with Regularization
     

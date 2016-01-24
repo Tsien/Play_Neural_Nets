@@ -17,6 +17,6 @@ function nn = nnapplygrads(nn)
             dW = nn.vW{i};
         end
             
-        nn.W{i} = nn.W{i} - dW;
+        nn.W{i} = nn.W{i} - dW;% w = w - alpha * dE/dW
     end
 end

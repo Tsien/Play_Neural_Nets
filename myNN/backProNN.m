@@ -9,7 +9,8 @@
 %==========================================================================
 function nn = backProNN(nn)
     n = nn.layerNum;
-    for i = (n - 1) : -1 : 2
+    num = size(nn.delta{n}, 1);
+    for i = (n - 1) : -1 : 1
         % Derivative of the activation function
         switch nn.activeFunc 
             case 'Sigmoid'
@@ -22,11 +23,11 @@ function nn = backProNN(nn)
         end
         
         if i+1==n % no bias term to be removed             
-            nn.delta{i} = (nn.delta{i + 1} * nn.W{i}) .* deri_actFuc;
-            nn.dEdW{i} = (nn.delta{i + 1}' * nn.activation{i}) / size(nn.delta{i + 1}, 1);
+            nn.delta{i} = (nn.delta{i + 1} * nn.weights{i}') .* deri_actFuc;%(100 X 10) X (300 X 10)' .X (100 X 300)
+            nn.dEdW{i} = (nn.delta{i + 1}' * nn.activation{i}) / num;
         else % the bias term needs to be removed
-            nn.delta{i} = (nn.delta{i + 1}(:, 2:end) * nn.W{i}) .* deri_actFuc;
-            nn.dEdW{i} = (nn.delta{i + 1}(:, 2:end)' * nn.activation{i}) / size(nn.delta{i + 1}, 1);
+            nn.delta{i} = (nn.delta{i + 1}(:, 2:end) * nn.weights{i}') .* deri_actFuc;
+            nn.dEdW{i} = (nn.delta{i + 1}(:, 2:end)' * nn.activation{i}) / num;
         end
-    end    
+    end
 end

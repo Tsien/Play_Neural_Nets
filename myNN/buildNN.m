@@ -14,7 +14,7 @@
 function nn = buildNN(archit)
     nn.architecture = archit;
     nn.layerNum = numel(archit); % Ex(h): the number of layers
-    nn.learnRate = 0.1; % learning rate
+    nn.learnRate = 2; % learning rate
     nn.scalLearnRate = 1; % scaling learning rate between every epoch
     nn.test = 0; % distinct training and testing
     
@@ -25,6 +25,6 @@ function nn = buildNN(archit)
 
     %initial nets' weights
     for i = 2 : nn.layerNum
-        nn.weights{i - 1} = rand(archit(i - 1), archit(i)) - 0.5;
+        nn.weights{i - 1} = rand(archit(i - 1) + 1, archit(i)) - 0.5;
     end
 end

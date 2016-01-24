@@ -9,8 +9,8 @@
 function nn = updateWNN(nn)
     n = nn.layerNum;
     for i = 1 : (n - 1)
-        deltaW = nn.learningRate * nn.dEdW{i};            
-        nn.weights{i} = nn.weights{i} - deltaW;% w = w - alpha * dE/dW
+        deltaW = nn.learnRate * nn.dEdW{i};            
+        nn.weights{i} = nn.weights{i} - deltaW';% w = w - alpha * dE/dW
     end    
 end
 

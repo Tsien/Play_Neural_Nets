@@ -1,5 +1,7 @@
 function test_example_NN
+tic;
 load mnist_uint8;
+toc
 
 train_x = double(train_x) / 255;
 test_x  = double(test_x)  / 255;
@@ -14,7 +16,7 @@ test_x = normalize(test_x, mu, sigma);
 %% ex1 vanilla neural net
 rand('state',0)
 nn = nnsetup([784 100 10]);
-opts.numepochs = 10;   %  Number of full sweeps through data
+opts.numepochs = 1;   %  Number of full sweeps through data
 opts.batchsize = 100;  %  Take a mean gradient step over this many samples
 opts.plot = 1;
 [nn, L] = nntrain(nn, train_x, train_y, opts);
