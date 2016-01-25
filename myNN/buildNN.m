@@ -14,7 +14,7 @@
 function nn = buildNN(archit)
     nn.architecture = archit;
     nn.layerNum = numel(archit); % Ex(h): the number of layers
-    nn.learnRate = 2; % learning rate
+    nn.learnRate = 1.5; % learning rate
     
     nn.lambda = 0; % Ex(e): weight decay, L2 regularization, w = w - alpha (dEdW + lambda w)
     nn.gamma = 0; % Ex(f): Momentum

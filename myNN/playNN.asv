@@ -21,7 +21,7 @@ function playNN(dataFile)
     rand('state', 0); 
     % build neural networks
     nn = buildNN([784, 100, 10]);
-    exp.numEpochs = 30; 
+    exp.numEpochs = 50; 
     exp.batchSize = 100;
     exp.valid = 1; % cross-validation to decide the stopping criteria
 % %==========================================================================
@@ -50,27 +50,23 @@ function playNN(dataFile)
 %     plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
 %     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
 %     acc = testNN(nn, test_x, test_y);
-% %==========================================================================
-%     %Ex(g) Experiment with different Activations--Funny Tanh
-%     nn.activeFunc = 'Tanh';
-%     nn.learnRate = 0.1;
-%     exp.numEpochs = 100;
-%     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-%     plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
-%     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
-%     acc = testNN(nn, test_x, test_y);
-% %==========================================================================
-%     %Ex(g) Experiment with different Activations--ReLU
-%     nn.activeFunc = 'ReLU';
-%     nn.learnRate = 0.05;
-%     exp.numEpochs = 100;
-%     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-%     plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
-%     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
-%     acc = testNN(nn, test_x, test_y);
+%==========================================================================
+    %Ex(g) Experiment with different Activations--Funny Tanh
+    nn.activeFunc = 'Tanh';
+    nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
+    acc = testNN(nn, test_x, test_y);
+%==========================================================================
+    %Ex(g) Experiment with different Activations--ReLU
+    nn.activeFunc = 'ReLU';
+    nn.learnRate = 0.01;
+    nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
+    acc = testNN(nn, test_x, test_y);
 %==========================================================================
     %Ex(h) Experiemnt with different Network Topology, 50 hidden 
-    rand('state', 0); 
     nn = buildNN([784, 50, 10]);
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
     plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
@@ -78,7 +74,6 @@ function playNN(dataFile)
     acc = testNN(nn, test_x, test_y);
 %==========================================================================
     %Ex(h) Experiemnt with different Network Topology, 200 hidden
-    rand('state', 0); 
     nn = buildNN([784, 200, 10]);
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
     plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
@@ -86,7 +81,6 @@ function playNN(dataFile)
     acc = testNN(nn, test_x, test_y);
 %==========================================================================
     %Ex(h) Experiemnt with different Network Topology, 2 hidden layer
-    rand('state', 0); 
     nn = buildNN([784, 100, 100, 10]);
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
     plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
