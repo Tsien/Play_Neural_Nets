@@ -15,16 +15,17 @@ function nn = buildNN(archit)
     nn.architecture = archit;
     nn.layerNum = numel(archit); % Ex(h): the number of layers
     nn.learnRate = 2; % learning rate
-    nn.scalLearnRate = 1; % scaling learning rate between every epoch
-    nn.test = 0; % distinct training and testing
     
-    nn.weightDecay = 0; % Ex(e): L2 regularization
-    nn.momentum = 0.5; % Ex(f): Momentum
+    nn.lambda = 0; % Ex(e): weight decay, L2 regularization, w = w - alpha (dEdW + lambda w)
+    nn.gamma = 0; % Ex(f): Momentum
     nn.activeFunc = 'Sigmoid'; % Ex(g): the activation function of hidden neurons, Sigmoid, Tanh or ReLU
     nn.output = 'Softmax'; % Ex(g): the activation function of output neurons, Sigmoid or Softmax    
 
     %initial nets' weights
     for i = 2 : nn.layerNum
         nn.weights{i - 1} = rand(archit(i - 1) + 1, archit(i)) - 0.5;
+        %NAG: for accelerating gradient descent that accumulates a velocity
+        %vector in directions of persistent reduction in the objective across iterations. 
+        nn.vW{i - 1} = zeros(size(nn.weights{i - 1}));
     end
 end

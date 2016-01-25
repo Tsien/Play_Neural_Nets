@@ -5,12 +5,18 @@
 %       nn     : neural networks including its parameters and structure
 %       x      : input of neural nets, m X 784, a small subset of data
 %       y      : labels
+%Output:
+%       nn     : neural networks including statistics on the differences
 %==========================================================================
-function compGrad(nn, x, y)
+function nn = compGrad(nn, x, y)
     epsilon = 1e-5;
     n = nn.layerNum;
+    nn.checkMax = -1;% max difference
+    nn.checkMean = 0;% mean difference
+    num = 0;
     for l = 1 : n - 1
         m = size(nn.weights{l});
+        num = num + numel(nn.weights{l});
         for i = 1 : m(1)
             for j = 1 : m(2)
                 tmp = nn.weights{l}(i, j);
@@ -27,11 +33,13 @@ function compGrad(nn, x, y)
                 %calculate the numerical gradient approximation
                 dEdW = (E1 - E2) / (2 * epsilon);
                 %Compare
-                delta = abs(dEdW - nn.dEdW{l}(i, j));
-                assert(delta < 1e-3, 'numerical gradient checking failed');
+                delta = abs(dEdW - nn.dEdW{l}(j, i));
+                nn.checkMean = nn.checkMean + delta;
+                nn.checkMax = max(delta, nn.checkMax);
             end
         end
     end
+    nn.checkMean = nn.checkMean/num;
 end
 
 
