@@ -27,7 +27,8 @@ function nn = backProNN(nn)
         end
         %weight decay, L2 regularization, w = w - alpha (dEdW + lambda w)
         if nn.lambda > 0
-           nn.dEdW{i} = nn.dEdW{i} + nn.lambda * [zeros(size(nn.weights{i}, 2), 1), nn.weights{i}(2:end, :)'];
+           nn.dEdW{i} = nn.dEdW{i} + nn.lambda * ...
+            [zeros(size(nn.weights{i}, 2), 1), nn.weights{i}(2:end, :)'];
         end
     end
 

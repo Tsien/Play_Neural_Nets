@@ -21,14 +21,15 @@ function playNN(dataFile)
     rand('state', 0); 
     % build neural networks
     nn = buildNN([784, 100, 10]);
-    exp.numEpochs = 30; 
+    exp.numEpochs = 1; 
     exp.batchSize = 100;
     exp.valid = 1; % cross-validation to decide the stopping criteria
 %==========================================================================
     %Ex(d) Classification on MNIST database using vanilla neural networks 
     %set up the parameters of experiments
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, ...
+        [1:exp.numEpochs], nn.testAcc);
     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
     %check numerical gradient 
     %nn = compGrad(nn, train_x(1:100, :), train_y(1:100, :));
@@ -38,7 +39,8 @@ function playNN(dataFile)
     nn.lambda = 0.0001;
     nn.learnRate = 0.5;
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, ...
+        [1:exp.numEpochs], nn.testAcc);
     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
     acc = testNN(nn, test_x, test_y);
 %==========================================================================    
@@ -47,7 +49,8 @@ function playNN(dataFile)
     nn.gamma = 0.9;
     nn.learnRate = 0.25;
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, ...
+        [1:exp.numEpochs], nn.testAcc);
     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
     acc = testNN(nn, test_x, test_y);
 %==========================================================================
@@ -56,16 +59,18 @@ function playNN(dataFile)
     nn.learnRate = 0.1;
     exp.numEpochs = 100;
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, ...
+        [1:exp.numEpochs], nn.testAcc);
     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
     acc = testNN(nn, test_x, test_y);
 %==========================================================================
     %Ex(g) Experiment with different Activations--ReLU
     nn.activeFunc = 'ReLU';
-    nn.learnRate = 0.05;
-    exp.numEpochs = 100;
+    nn.learnRate = 0.001;
+    exp.numEpochs = 300;
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, ...
+        [1:exp.numEpochs], nn.testAcc);
     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
     acc = testNN(nn, test_x, test_y);
 %==========================================================================
@@ -73,7 +78,8 @@ function playNN(dataFile)
     rand('state', 0); 
     nn = buildNN([784, 50, 10]);
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, ...
+        [1:exp.numEpochs], nn.testAcc);
     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
     acc = testNN(nn, test_x, test_y);
 %==========================================================================
@@ -81,7 +87,8 @@ function playNN(dataFile)
     rand('state', 0); 
     nn = buildNN([784, 200, 10]);
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, ...
+        [1:exp.numEpochs], nn.testAcc);
     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
     acc = testNN(nn, test_x, test_y);
 %==========================================================================
@@ -89,7 +96,8 @@ function playNN(dataFile)
     rand('state', 0); 
     nn = buildNN([784, 100, 100, 10]);
     nn = trainNN(nn, train_x, train_y, exp, test_x, test_y);
-    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, [1:exp.numEpochs], nn.testAcc);
+    plot([1:exp.numEpochs],nn.trainAcc,[1:exp.numEpochs],nn.validAcc, ...
+        [1:exp.numEpochs], nn.testAcc);
     legend('Training Accuracy', 'Validation Accuracy', 'Test Accuracy');
     acc = testNN(nn, test_x, test_y);
 end

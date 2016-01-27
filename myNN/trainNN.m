@@ -27,8 +27,10 @@ function nn = trainNN(nn, train_x, train_y, exp, test_x, test_y)
         tic;
         index = randperm(numSample); % randomly select samples
     	for j = 1 : numBatches
-            batch_x = train_x(index((j - 1) * exp.batchSize + 1:j * exp.batchSize), :);
-            batch_y = train_y(index((j - 1) * exp.batchSize + 1:j * exp.batchSize), :);
+            batch_x = train_x(index((j - 1) * exp.batchSize + 1:j ...
+                * exp.batchSize), :);
+            batch_y = train_y(index((j - 1) * exp.batchSize + 1:j ...
+                * exp.batchSize), :);
             %forward
             nn = forwardNN(nn, batch_x, batch_y);
             %Backpropagation to update weights
